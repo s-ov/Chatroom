@@ -43,7 +43,29 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     "Handle login form for user"
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Ім\'я:', validators=[DataRequired()])
+    password = PasswordField('Пароль:', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    "Handle form for password request sending."
+    email = StringField(
+        "Email", 
+        validators=[DataRequired(), Email()],
+        )
+    submit = SubmitField("Request Password Reset")
+
+
+class ResetPasswordForm(FlaskForm):
+    "Handle form for password request sending."
+    password = PasswordField(
+        "New Password", 
+        validators=[DataRequired()],
+        )
+    password2 = PasswordField(
+        "Repeat Password", 
+        validators=[DataRequired(), EqualTo("password")],
+    )
+    submit = SubmitField("Confirm Password Reset")

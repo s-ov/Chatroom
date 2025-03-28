@@ -1,0 +1,21 @@
+[2025-03-28 11:59:03,728] INFO in __init__: Logging is configured.
+[2025-03-28 11:59:06,700] INFO in __init__: Logging is configured.
+[2025-03-28 12:02:29,833] DEBUG in auth_routes: Reset password request initiated.
+[2025-03-28 12:02:30,038] DEBUG in auth_routes: Rendering reset password request page.
+[2025-03-28 12:02:49,646] DEBUG in auth_routes: Reset password request initiated.
+[2025-03-28 12:02:51,846] DEBUG in auth_routes: Form submitted with email: s.ovsiuk@gmail.com
+[2025-03-28 12:02:52,314] INFO in auth_routes: User found: s.ovsiuk@gmail.com. Sending reset password email.
+[2025-03-28 12:02:52,314] DEBUG in services: Initiating password reset email process for user ID: 1,          Email: s.ovsiuk@gmail.com
+[2025-03-28 12:02:52,315] DEBUG in models: Generating reset password token for user ID: 1,              Email: s.ovsiuk@gmail.com
+[2025-03-28 12:02:52,315] DEBUG in models: Generated token for user ID 1: InMub3ZzaXVrQGdtYWlsLmNvbSI.Z-ZzzA.FGG5bTuLrmLNWVFsZmnkc7lf_t8
+[2025-03-28 12:02:52,315] DEBUG in services: Generated reset password URL: http://127.0.0.1:5000/auth/reset_password/InMub3ZzaXVrQGdtYWlsLmNvbSI.Z-ZzzA.FGG5bTuLrmLNWVFsZmnkc7lf_t8/1
+[2025-03-28 12:02:52,317] DEBUG in services: Rendered reset password email content successfully.
+[2025-03-28 12:02:57,443] INFO in services: Password reset email sent successfully to s.ovsiuk@gmail.com
+[2025-03-28 12:02:57,582] DEBUG in auth_routes: Reset password request initiated.
+[2025-03-28 12:02:57,617] DEBUG in auth_routes: Rendering reset password request page.
+[2025-03-28 12:03:31,220] DEBUG in models: Validating reset password token for user ID: 1
+[2025-03-28 12:03:31,232] DEBUG in models: Token successfully decoded for user ID 1
+[2025-03-28 12:03:31,234] INFO in models: Reset password token validated successfully for user ID 1
+[2025-03-28 12:03:48,845] DEBUG in models: Validating reset password token for user ID: 1
+[2025-03-28 12:03:48,849] DEBUG in models: Token successfully decoded for user ID 1
+[2025-03-28 12:03:48,850] INFO in models: Reset password token validated successfully for user ID 1
