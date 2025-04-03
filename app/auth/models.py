@@ -19,7 +19,15 @@ logger = logging.getLogger(__name__)
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return db.session.get(User, int(id))
+
+
+followers = db.Table('followers',
+                     db.metadata,
+                     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+                     db.Column('followed_id', db.Integer, db.ForeignKey('user.id')),
+                     extend_existing=True,
+            )
 
 
 class User(UserMixin, db.Model):
@@ -74,7 +82,10 @@ class User(UserMixin, db.Model):
         try:
             token_user_email = serializer.loads(
                 token,
-                max_age=current_app.config.get("RESET_PASS_TOKEN_MAX_AGE", 3600),  
+                max_age=current_app.config.get(
+                    "RESET_PASS_TOKEN_MAX_AGE", 
+                    3600,
+                    ),  
                 salt=user.password_hash,
             )
             logger.debug(f"Token successfully decoded for user ID {user_id}")
@@ -96,3 +107,17 @@ class User(UserMixin, db.Model):
 
         logger.info(f"Reset password token validated successfully for user ID {user_id}")
         return user
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        """Check if the current user follows another user."""
+        if user is None:
+            return False  
+        return self.followed.filter(followers.c.followed_id == user.id).count() > 0
