@@ -1,0 +1,54 @@
+<p>
+    {% if user.profile_picture %}
+        <img src="{{ url_for(
+                    'static', 
+                    filename='uploads/profile_pics/' + user.profile_picture) }}" 
+            alt="ava"
+            > 
+    {% else %} 
+        <img src="{{ url_for(
+                    'static', 
+                    filename='uploads/profile_pics/default.jpg') }}" 
+            alt="default.png"
+        > 
+    {% endif %}
+</p>
+
+<div class="bg-info text-dark fw-bold mt-5 p-2 rounded">
+    <h4>{{ user.username }}</h4> 
+    
+    {% if user.last_seen %}
+        <p>Last seen:{{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>
+    {% endif %}
+    {% if user.bio %}
+        <p>{{ user.bio }}</p>  
+    {% endif %} 
+    {% if current_user.is_authenticated and current_user.id == user.id %} 
+        <a href="{{ url_for('user.upload_profile_picture', user_id=current_user.id) }}"
+            class="btn btn-primary">
+                Avatar
+        </a>
+        <a href="{{ url_for('user.delete_user_request') }}" 
+            class="btn btn-primary">
+                Delete account
+        </a>
+    {% endif %}
+</div>
+
+<div class="btn-group m-1">
+    {% if current_user.is_authenticated and current_user.id != user.id %}
+        {% if current_user.is_following(user) %}
+            <a href="{{ url_for('user.unfollow', username=user.username) }}" 
+               class="btn btn-danger">
+                 Unfollow
+            </a>
+        {% else %}
+            <a href="{{ url_for('user.follow', username=user.username) }}" 
+               class="btn btn-primary">
+                Follow
+            </a>
+        {% endif %}
+    {% endif %}
+    
+</div>
+<hr>

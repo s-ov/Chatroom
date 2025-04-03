@@ -27,8 +27,11 @@ def create_app(config_name='development'):
     mail.init_app(app)
     configure_logging(app)
 
-    from app.auth import auth_bp
+    from app.auth.auth_routes import auth_bp
     app.register_blueprint(auth_bp, url_prefix="/auth",)
+
+    from app.auth.routes import user_bp
+    app.register_blueprint(user_bp, url_prefix="/user",)
 
     @app.route("/")
     def main():
@@ -45,7 +48,6 @@ def create_app(config_name='development'):
         You can work in < flask shell > without importing.
         """
         return {"db": db, "User": User}
-
 
     return app
 

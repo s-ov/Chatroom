@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="align-items-start w-50 m-3">
+        <div class="container text-dark fw-bold mt-5 p-2">
+            <h2 class="text-dark text-center">{{ title }}</h2>
+
+            {% include "user/user_detail.html" %}
+            
+        </div>
+    </div>
+{% endblock %}  

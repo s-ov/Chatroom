@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container w- 50 text-dark fw-bold mt-5">
+    <h2>{{ title }}</h2>
+    
+    {% if current_user.is_authenticated %}
+    <form method="POST" 
+          enctype="multipart/form-data"
+          action="{{ url_for('user.upload_profile_picture', user_id=current_user.id) }}"
+    >
+            {{ form.hidden_tag() }}
+
+            <p>
+                {{ form.profile_picture.label }}</br> 
+                {{ form.profile_picture() }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}

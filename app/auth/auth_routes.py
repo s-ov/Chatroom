@@ -1,12 +1,11 @@
 from flask import (
-    render_template, redirect, url_for, flash,
+    Blueprint, render_template, redirect, url_for, flash,
     )
 from flask_login import (
     current_user, login_user, logout_user,
     )
 from flask_babel import lazy_gettext as _
 from app.extensions import db
-from app.auth import auth_bp
 from app.auth.models import User
 from app.auth.forms import (
     RegistrationForm,
@@ -19,6 +18,12 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
+auth_bp = Blueprint(
+    "auth", 
+    __name__, 
+    template_folder="templates",
+    )
 
 
 @auth_bp.route("/")

@@ -2,6 +2,8 @@ import sys
 import os
 import pytest
 
+from flask import url_for
+
 from app.auth.models import User
 
 sys.path.insert(
@@ -30,12 +32,25 @@ def app():
 def client(app):
     return app.test_client()
 
+
+@pytest.fixture
+def logged_in_client(client, user):
+    """Logs in the test user before each request using the login route."""
+    with client:
+        response = client.post(
+            url_for("auth.login"),
+            data={"email": user.email, "password": user.set_password("testpassword")},
+            follow_redirects=True
+        )
+        yield client  # Return the logged-in client
+
+
     
 @pytest.fixture
 def user(app):
     """Create a test user in the database."""
     with app.app_context():
-        user = User(email="test@example.com")
+        user = User(username="testuser", email="test@example.com")
         user.set_password("password123")  
         db.session.add(user)
         db.session.commit()

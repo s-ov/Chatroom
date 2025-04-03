@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="align-items-start w-50 m-3">
+        <h2 class="text-dark text-center">{{ title }}</h2>
+
+        {% for user in users %}
+            {% include "user/user_detail.html" %}
+        {% endfor %}
+        
+        {% include "paginator.html" %}
+    </div>
+
+{% endblock %}        

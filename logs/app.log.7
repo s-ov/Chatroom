@@ -1,12 +1,24 @@
-[2025-04-03 09:40:52,738] INFO in __init__: Logging is configured.
-[2025-04-03 09:40:53,566] DEBUG in services: Initiating password reset email process for user ID: 1,          Email: test@example.com
-[2025-04-03 09:40:53,574] DEBUG in models: Generating reset password token for user ID: 1,              Email: test@example.com
-[2025-04-03 09:40:53,576] DEBUG in models: Generated token for user ID 1: InRlc3RAZXhhbXBsZS5jb20i.Z-4tdQ.lQ-N_h_z180IDUFyHlZxILFG_Ww
-[2025-04-03 09:40:53,577] DEBUG in services: Generated reset password URL: http://localhost:5000/auth/reset_password/InRlc3RAZXhhbXBsZS5jb20i.Z-4tdQ.lQ-N_h_z180IDUFyHlZxILFG_Ww/1
-[2025-04-03 09:40:53,580] DEBUG in services: Rendered reset password email content successfully.
-[2025-04-03 09:40:53,582] ERROR in services: Failed to send password reset email to test@example.com: Email error
+[2025-04-03 11:21:12,876] DEBUG in models: Generating reset password token for user ID: 1,              Email: test@example.com
+[2025-04-03 11:21:12,878] DEBUG in models: Generated token for user ID 1: InRlc3RAZXhhbXBsZS5jb20i.Z-5E-A.hdskM38H6HENIiiALpERwL9lqqQ
+[2025-04-03 11:21:12,880] DEBUG in services: Generated reset password URL: http://localhost:5000/auth/reset_password/InRlc3RAZXhhbXBsZS5jb20i.Z-5E-A.hdskM38H6HENIiiALpERwL9lqqQ/1
+[2025-04-03 11:21:12,883] DEBUG in services: Rendered reset password email content successfully.
+[2025-04-03 11:21:12,885] INFO in services: Password reset email sent successfully to test@example.com
+[2025-04-03 11:21:13,161] INFO in __init__: Logging is configured.
+[2025-04-03 11:21:13,933] DEBUG in services: Initiating password reset email process for user ID: 1,          Email: test@example.com
+[2025-04-03 11:21:13,938] DEBUG in models: Generating reset password token for user ID: 1,              Email: test@example.com
+[2025-04-03 11:21:13,941] DEBUG in models: Generated token for user ID 1: InRlc3RAZXhhbXBsZS5jb20i.Z-5E-Q.cPrnb0Nd127whWYGgRQ7fZsQlNo
+[2025-04-03 11:21:13,943] DEBUG in services: Generated reset password URL: http://localhost:5000/auth/reset_password/InRlc3RAZXhhbXBsZS5jb20i.Z-5E-Q.cPrnb0Nd127whWYGgRQ7fZsQlNo/1
+[2025-04-03 11:21:13,946] DEBUG in services: Rendered reset password email content successfully.
+[2025-04-03 11:21:13,948] INFO in services: Password reset email sent successfully to test@example.com
+[2025-04-03 11:21:14,175] INFO in __init__: Logging is configured.
+[2025-04-03 11:21:14,936] DEBUG in services: Initiating password reset email process for user ID: 1,          Email: test@example.com
+[2025-04-03 11:21:14,940] DEBUG in models: Generating reset password token for user ID: 1,              Email: test@example.com
+[2025-04-03 11:21:14,945] DEBUG in models: Generated token for user ID 1: InRlc3RAZXhhbXBsZS5jb20i.Z-5E-g.5sdRyISOm53ULkP2k5QB9ymHRHE
+[2025-04-03 11:21:14,948] DEBUG in services: Generated reset password URL: http://localhost:5000/auth/reset_password/InRlc3RAZXhhbXBsZS5jb20i.Z-5E-g.5sdRyISOm53ULkP2k5QB9ymHRHE/1
+[2025-04-03 11:21:14,951] DEBUG in services: Rendered reset password email content successfully.
+[2025-04-03 11:21:14,953] ERROR in services: Failed to send password reset email to test@example.com: Email error
 Traceback (most recent call last):
-  File "/home/s-ovsiuk/ALFA_SAFE/Chatroom/app/auth/services.py", line 47, in send_reset_password_email
+  File "/home/s-ovsiuk/ALFA_SAFE/Chatroom/app/auth/services.py", line 53, in send_reset_password_email
     message.send()
   File "/usr/lib/python3.8/unittest/mock.py", line 1081, in __call__
     return self._mock_call(*args, **kwargs)
