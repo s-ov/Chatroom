@@ -40,22 +40,22 @@ def test_upload_profile_picture_success(logged_in_client, user, db_session):
         os.remove(uploaded_path)
 
 
-# def test_upload_invalid_file_type(logged_in_client, user, app):
-#     """Test uploading a file with an invalid extension."""
-#     file_data = FileStorage(
-#             stream=open("tests/conftest.py", "rb"),
-#             filename="conftest.py",
-#             content_type="application/x-msdownload"
-#         )
+def test_upload_invalid_file_type(logged_in_client, user, app):
+    """Test uploading a file with an invalid extension."""
+    file_data = FileStorage(
+            stream=open("tests/conftest.py", "rb"),
+            filename="conftest.py",
+            content_type="application/x-msdownload"
+        )
 
-#     response = logged_in_client.post(
-#                 url_for("user.upload_profile_picture", user_id=user.id),
-#                 data={"profile_picture": file_data},
-#                 content_type="multipart/form-data",
-#                 follow_redirects=True
-#             )
+    response = logged_in_client.post(
+                url_for("user.upload_profile_picture", user_id=user.id),
+                data={"profile_picture": file_data},
+                content_type="multipart/form-data",
+                follow_redirects=True
+            )
 
-#     assert response.status_code == 200       
+    assert response.status_code == 200       
 
     
 

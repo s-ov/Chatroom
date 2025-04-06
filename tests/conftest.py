@@ -42,8 +42,7 @@ def logged_in_client(client, user):
             data={"email": user.email, "password": user.set_password("testpassword")},
             follow_redirects=True
         )
-        yield client  # Return the logged-in client
-
+        yield client  
 
     
 @pytest.fixture

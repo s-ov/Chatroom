@@ -5,7 +5,7 @@ from flask import (
     flash,
     url_for,
     request,
-    abort,
+    abort, session,
     )
 from flask_login import (
     current_user, 
@@ -89,6 +89,29 @@ def upload_profile_picture(user_id):
         )
 
 
+@user_bp.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    "Handle user profile page updating"
+    form = EditProfileForm(current_user.username)
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        flash('Edited successfully.')
+        return redirect(url_for('user.edit_profile'))
+        
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.bio.data = current_user.bio
+
+    return render_template(
+        'user/edit_profile.html', 
+        title='Edit profile',
+        form=form,
+        )
+
+
 @user_bp.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_user_request():
@@ -115,34 +138,12 @@ def delete_user():
                 db.session.delete(user)
                 db.session.commit()
                 flash("Your account has been successfully deleted.", "success")
-                return redirect(url_for('user.index')) 
+                db.session.clear()
+                return redirect(url_for('auth.login')) 
         else:
             flash("Incorrect password. Account not deleted.", "danger")
 
     return redirect(url_for('user.delete_user_request'))  
-
-
-@user_bp.route('/edit_profile', methods=['GET', 'POST'])
-@login_required
-def edit_profile():
-    "Handle user profile page updating"
-    form = EditProfileForm(current_user.username)
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.bio = form.bio.data
-        db.session.commit()
-        flash('Зміни були збережені.')
-        return redirect(url_for('user.edit_profile'))
-        
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.bio.data = current_user.bio
-
-    return render_template(
-        'user/edit_profile.html', 
-        title='Редагувати профіль',
-        form=form,
-        )
 
 
 @user_bp.route('/all_users', methods=['GET'])
@@ -189,8 +190,11 @@ def follow(username):
 
     if user == current_user:
         flash("You cannot follow yourself!", "warning")
-        return redirect(url_for('user.get_user_profile', username=username))
-    
+        return redirect(
+            url_for('user.get_user_profile', 
+                    username=username,
+                    )
+            )
     follow_user(current_user, user)
     flash(f"You are now following {user.username}!", "success")
     return redirect(url_for('user.get_user_profile', username=username))

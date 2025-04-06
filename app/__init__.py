@@ -33,6 +33,9 @@ def create_app(config_name='development'):
     from app.auth.routes import user_bp
     app.register_blueprint(user_bp, url_prefix="/user",)
 
+    from app.posts.routes import posts_bp
+    app.register_blueprint(posts_bp, url_prefix="/post",)
+
     @app.route("/")
     def main():
         "Render initial page"
