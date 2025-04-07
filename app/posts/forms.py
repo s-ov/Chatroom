@@ -7,7 +7,7 @@ from wtforms.validators import (
 
 class PostForm(FlaskForm):
     "Class for post form"
-    post = TextAreaField('Скажи свою думку', 
+    post = TextAreaField("Say something", 
                         validators=[
                                 DataRequired(), 
                                 Length(min=2, max=140),
