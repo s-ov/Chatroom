@@ -7,13 +7,28 @@ from urllib.parse import urlparse, urljoin
 
 from config import Config
 from app.extensions import db
-from app.auth.reset_password_email_content import (
-    reset_password_email_html_content
-)
+
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
+RESET_PASSWORD_EMAIL_HTML_CONTENT = """
+    <p>Hello,</p>
+    <p>You are receiving this email because you requested a password reset for your account.</p>
+    <p>
+        To reset your password
+        <a href="{{ reset_password_url }}">click here</a>.
+    </p>
+    <p>
+        Alternatively, you can paste the following link in your browser's address bar: <br>
+        {{ reset_password_url }}
+    </p>
+    <p>If you have not requested a password reset please contact someone from the development team.</p>
+    <p>
+        Thank you!
+    </p>
+"""
 
   
 def send_reset_password_email(user):
@@ -36,7 +51,7 @@ def send_reset_password_email(user):
             )
 
         email_body = render_template_string(
-            reset_password_email_html_content, 
+            RESET_PASSWORD_EMAIL_HTML_CONTENT, 
             reset_password_url=reset_password_url,
         )
         logger.debug(

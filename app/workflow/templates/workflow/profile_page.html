@@ -3,6 +3,8 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+{{ moment.include_moment() }}
+
 <div class="container">
     <div class="container-create-post text-dark fw-bold mt-5">
 
@@ -33,26 +35,22 @@
                                 <p>{{ current_user.bio }}</p>
                             {% endif %}
                             <a href="{{ url_for('user.delete_user_request') }}" 
-                                class="">
+                                class="btn btn-warning">
                                     Delete account
+                            </a>
+                            <a href="{{ url_for('user.upload_profile_picture', user_id=current_user.id) }}" 
+                               class="btn btn-primary">
+                                Edit avatar
+                            </a>
+                            <a href="{{ url_for('user.edit_profile') }}" class="btn btn-primary">
+                                Edit profile
                             </a>
                         </div> 
                     </td>
                 </tr>
             </table>  
               
-            <div class="btn-group mb-5">
-                <a href="{{ url_for('user.upload_profile_picture', user_id=current_user.id) }}" 
-                   class="btn btn-primary">
-                   Edit avatar
-                </a>
-                <a href="{{ url_for('user.edit_profile') }}" class="btn btn-primary">
-                    Edit profile
-                </a>
-                
-                {% include 'paginator.html' %}
-            </div>
-              
+            {% include 'paginator.html' %}
         </div>
 
         <div class="col right">

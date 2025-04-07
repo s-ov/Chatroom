@@ -87,7 +87,15 @@ img {
   border-radius: 50%;
   margin: 5px;
 }
-e
+
+#post_ava {
+  width: 3rem; 
+  height: 3rem; 
+  padding: 1px;
+  border: 1px darkcyan double; 
+  border-radius: 50%;
+  margin: 5px;
+}
 
 h3 {
   border: 3px double var(--color1);

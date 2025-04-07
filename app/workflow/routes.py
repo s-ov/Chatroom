@@ -14,7 +14,7 @@ workflow_bp = Blueprint(
     )
 
 
-@workflow_bp.route('/<username>', methods=['GET', 'POST'])
+@workflow_bp.route('/profile_page/<username>', methods=['GET', 'POST'])
 @login_required
 def profile_page(username):
     "Display user profile along with their posts."

@@ -8,7 +8,7 @@
         </svg>
       </li>
       <span style="margin-left: 20em;"><li></li></span> 
-      <li><a href="" class="nav-link">Main</a></li>
+      <li><a href="{{ url_for('main') }}" class="nav-link">Main</a></li>
         
       {% if current_user.is_anonymous %}
         <li>
@@ -35,13 +35,15 @@
           </li>
 
           <li>
-            <a href="{{ url_for('posts.get_all_posts') }}" class="nav-link">
-              All post
+            <a href="{{ url_for('workflow.chatroom_page', username=current_user.username) }}" 
+               class="nav-link">
+              Chatroom
             </a>
           </li>
 
           <li>
-            <a href="{{ url_for('user.get_user_profile', username=current_user.username) }}" class="nav-link">
+            <a href="{{ url_for('workflow.profile_page', username=current_user.username) }}" 
+               class="nav-link">
               Мій профіль
             </a>
           </li>

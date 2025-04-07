@@ -186,26 +186,26 @@ def get_users_list():
 @login_required
 def follow(username):
     """Follow a user by their username."""
+    page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
 
     if user == current_user:
         flash("You cannot follow yourself!", "warning")
-        return redirect(
-            url_for('user.get_user_profile', 
-                    username=username,
-                    )
-            )
+        return redirect(url_for('user.get_users_list', page=page))
+
     follow_user(current_user, user)
     flash(f"You are now following {user.username}!", "success")
-    return redirect(url_for('user.get_user_profile', username=username))
+    return redirect(url_for('user.get_users_list', page=page))
 
     
 @user_bp.route('/unfollow/<username>', methods=['GET'])
 @login_required
 def unfollow(username):
     """Unfollow a user by their username."""
+    page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
     
     unfollow_user(current_user, user)
+    
     flash(f"You have unfollowed {user.username}.", "info")
-    return redirect(url_for('user.get_user_profile', username=username))
+    return redirect(url_for('user.get_users_list', page=page,))

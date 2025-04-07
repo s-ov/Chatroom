@@ -111,3 +111,14 @@ def db_session():
     yield db.session
     db.session.rollback()
     db.drop_all()
+
+
+def login_user_via_client(client, email, password):
+    return client.post(
+        '/auth/login', 
+        data={
+            'email': email,
+            'password': password,
+        }, 
+        follow_redirects=True,
+        )

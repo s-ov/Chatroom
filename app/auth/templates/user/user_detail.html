@@ -38,12 +38,12 @@
 <div class="btn-group m-1">
     {% if current_user.is_authenticated and current_user.id != user.id %}
         {% if current_user.is_following(user) %}
-            <a href="{{ url_for('user.unfollow', username=user.username) }}" 
+            <a href="{{ url_for('user.unfollow', username=user.username, page=users.page) }}" 
                class="btn btn-danger">
                  Unfollow
             </a>
         {% else %}
-            <a href="{{ url_for('user.follow', username=user.username) }}" 
+            <a href="{{ url_for('user.follow', username=user.username, page=users.page) }}" 
                class="btn btn-primary">
                 Follow
             </a>

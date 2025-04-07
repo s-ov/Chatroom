@@ -36,7 +36,8 @@ def create_app(config_name='development'):
     from app.posts.routes import posts_bp
     app.register_blueprint(posts_bp, url_prefix="/post",)
 
-    
+    from app.workflow.routes import workflow_bp
+    app.register_blueprint(workflow_bp, url_prefix="/workflow",)
 
     @app.route("/")
     def main():
