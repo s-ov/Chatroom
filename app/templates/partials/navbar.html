@@ -7,20 +7,20 @@
           </text>
         </svg>
       </li>
-      <span style="margin-left: 30em;"><li></li></span>
+      <span style="margin-left: 20em;"><li></li></span> 
       <li><a href="" class="nav-link">Main</a></li>
         
       {% if current_user.is_anonymous %}
-          <li>
-            <a href="{{ url_for('auth.login') }}" class="nav-link">
-              Login
-            </a>
-          </li>
-          <li>
-            <a href="{{ url_for('auth.register') }}" class="nav-link">
-              Реєстрація
-            </a>
-          </li>
+        <li>
+          <a href="{{ url_for('auth.login') }}" class="nav-link">
+            Login
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('auth.register') }}" class="nav-link">
+            Реєстрація
+          </a>
+        </li>
      {% else %}
           <li>
             <a href="{{ url_for('user.get_users_list') }}" class="nav-link">
@@ -31,6 +31,12 @@
           <li>
             <a href="{{ url_for('posts.create_post') }}" class="nav-link">
               New post
+            </a>
+          </li>
+
+          <li>
+            <a href="{{ url_for('posts.get_all_posts') }}" class="nav-link">
+              All post
             </a>
           </li>
 

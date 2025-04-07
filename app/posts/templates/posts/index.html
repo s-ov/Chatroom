@@ -3,6 +3,8 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+    {{ moment.include_moment() }}
+    
     {% if current_user.is_anonymous %}
         <div class="container text-dark fw-bold mt-5">
             <h2>You are on an Index page.</br>
@@ -12,16 +14,22 @@
     {% else %}
         <div class="container-create-post text-dark fw-bold mt-5">
             <div class="col left">
-                <h2>{{ title }}</h2>
+                
                 <h2>Hi, {{ current_user.username }}!</h2>
-                <p>Last seen: {{ moment(current_user.last_seen).format('LLLL') }}</p>
+                <p>Last seen: {{ moment(current_user.last_seen).format('MMMM Do YYYY, h:mm:ss a') }}</p>
 
                 {% include 'paginator.html' %}
 
             </div>
             <div class="col right">
                 <div class="scrollable-content">
-                    {% include 'workflow/posts_block.html' %}
+                    {% for post in posts %}
+                        <p>
+                            <span class="bg-light p-1">
+                                {{ post.user.username }}: {{ post.body }}
+                            </span>
+                        </p>
+                    {% endfor %}
                 </div>
             </div> 
         </div>         

@@ -36,12 +36,15 @@ def create_app(config_name='development'):
     from app.posts.routes import posts_bp
     app.register_blueprint(posts_bp, url_prefix="/post",)
 
+    
+
     @app.route("/")
     def main():
         "Render initial page"
         return render_template("base.html", title="Main")
 
     from app.auth.models import User
+    from app.posts.models import Post
 
     @app.shell_context_processor
     def make_shell_context():
@@ -50,7 +53,7 @@ def create_app(config_name='development'):
         and models to the shell session.
         You can work in < flask shell > without importing.
         """
-        return {"db": db, "User": User}
+        return {"db": db, "User": User, "Post": Post,}
 
     return app
 

@@ -16,6 +16,8 @@ posts_bp = Blueprint(
 def create_post():
     "Create a post instance"
     form = PostForm()
+    post = None
+    
     if form.validate_on_submit():
         post = Post(body=form.post.data, user_id=current_user.id)
         db.session.add(post)
@@ -23,13 +25,11 @@ def create_post():
         flash('Your post is now live!')
         return redirect(url_for('posts.create_post'))       # Post/Redirect/Get pattern
 
-    posts = Post.query.all()
-    
     return render_template(
             'posts/create_post.html', 
             title='Create post', 
             form=form,
-            posts=posts,
+            post=post,
         )
 
 

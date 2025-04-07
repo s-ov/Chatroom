@@ -1,0 +1,34 @@
+{% for post in posts %}
+    <p>
+        <span class="bg-light  mb-5 p-2 rounded">
+            {% if post.user.profile_picture %}
+                <a href="{{ url_for('user.get_user_profile', username=post.user.username) }}">
+                    <img src="{{ url_for(
+                            'static', 
+                            filename='uploads/profile_pics/' + post.user.profile_picture) }}" 
+                        alt="ava"
+                    > 
+                </a></br> 
+            {% else %} 
+                <a href="{{ url_for('user.get_user_profile', username=post.user.username) }}"> 
+                    <img src="{{ url_for(
+                        'static', 
+                        filename='uploads/profile_pics/default.jpg') }}" 
+                        alt="ava"
+                    > 
+                </a></br>     
+            {% endif %} 
+            
+            <small>{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</small></br>
+            {{ post.body }}
+            {% if post.user.id==current_user.id %}
+            <p>
+                <a href="{{ url_for('posts.delete_post', post_id=post.id) }}"
+                   class="btn btn-success">
+                    Delete
+                </a>
+            </p>
+            {% endif %}
+        </span>
+    </p>
+{% endfor %}

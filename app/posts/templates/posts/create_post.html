@@ -20,16 +20,5 @@
     </form>
     {% endif %}
 
-    {% if posts %}
-        {% for post in posts %}
-            <p>
-                <span class="bg-light p-1">
-                    {{ post.user_id.username }} - {{ post.body }}
-                </span>
-            </p>
-        {% endfor %}
-        <div class="min-vh-100"></div>
-    {% endif %}
-
 </div> 
 {% endblock %}

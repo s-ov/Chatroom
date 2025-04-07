@@ -3,8 +3,10 @@ import os
 import pytest
 
 from flask import url_for
+from flask_login import login_user
 
 from app.auth.models import User
+from app.posts.models import Post
 
 sys.path.insert(
     0, 
@@ -39,7 +41,10 @@ def logged_in_client(client, user):
     with client:
         response = client.post(
             url_for("auth.login"),
-            data={"email": user.email, "password": user.set_password("testpassword")},
+            data={
+                "email": user.email, 
+                "password": user.set_password("testpassword"),
+                },
             follow_redirects=True
         )
         yield client  
@@ -55,6 +60,48 @@ def user(app):
         db.session.commit()
         user = User.query.filter_by(email="test@example.com").first()
         return user
+    
+    
+@pytest.fixture
+def author_user(db_session):
+    user = User(
+        username='author', 
+        email='author@example.com',
+        )
+    user.set_password('password')
+    db.session.add(user)
+    db.session.commit()
+    return user
+    
+
+@pytest.fixture
+def logged_in_user(client, app, user):
+    with app.test_request_context():
+        login_user(user)
+    return user
+
+
+@pytest.fixture
+def other_user(db_session):
+    user = User(
+        username='intruder', 
+        email='intruder@example.com',
+        )
+    user.set_password('password')
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+
+@pytest.fixture
+def post_by_author(db_session, author_user):
+    post = Post(
+        body="Author's post", 
+        user_id=author_user.id,
+        )
+    db.session.add(post)
+    db.session.commit()
+    return post
 
 
 @pytest.fixture(scope="function")

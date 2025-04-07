@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="container-create-post text-dark fw-bold mt-5">
+
+        <div class="col left">
+            <table class="table table-hover">
+                <tr>
+                    <td width="8em">  
+                        {% if current_user.profile_picture %}
+                            <img src="{{ url_for(
+                                            'static', 
+                                            filename='uploads/profile_pics/' + current_user.profile_picture) }}" 
+                                 alt="Profile Picture"
+                            >
+                        {% else %}
+                            <img src="{{ url_for('static', filename='uploads/profile_pics/default.jpg') }}" 
+                                 alt="Default Profile Picture"
+                            >
+                        {% endif %}
+ 
+                    </td>
+                </tr>
+                <tr>    
+                    <td>
+                        <div class="bg-light p-3 rounded">
+                            <h3>{{ current_user.username }}</h3>
+                            <p>Last seen: {{ moment(current_user.last_seen).format('LLLL') }}</p>
+                            {% if current_user.bio %}
+                                <p>{{ current_user.bio }}</p>
+                            {% endif %}
+                            <a href="{{ url_for('user.delete_user_request') }}" 
+                                class="">
+                                    Delete account
+                            </a>
+                        </div> 
+                    </td>
+                </tr>
+            </table>  
+              
+            <div class="btn-group mb-5">
+                <a href="{{ url_for('user.upload_profile_picture', user_id=current_user.id) }}" 
+                   class="btn btn-primary">
+                   Edit avatar
+                </a>
+                <a href="{{ url_for('user.edit_profile') }}" class="btn btn-primary">
+                    Edit profile
+                </a>
+                
+                {% include 'paginator.html' %}
+            </div>
+              
+        </div>
+
+        <div class="col right">
+          <div class="scrollable-content">
+        
+            {% include 'workflow/posts_block.html' %}
+          </div>
+        </div>
+
+    </div>
+{% endblock %}
