@@ -69,7 +69,7 @@ def chatroom_page(username):
         post = Post(body=form.post.data, user_id=current_user.id)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')       # Post/Redirect/Get pattern
+        flash('Your post is now live!')       
         return redirect(url_for(
             'workflow.chatroom_page', 
             username=current_user.username,

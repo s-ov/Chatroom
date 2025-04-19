@@ -2,7 +2,7 @@ from app.posts.models import Post
 from conftest import login_user_via_client
 
 
-def test_profile_page_post_submission(client, user, db_session):
+def test_profile_page_post_submission(client, user,):
     login_user_via_client(client, user.email, "password")
 
     response = client.post(
@@ -21,7 +21,7 @@ def test_profile_page_post_submission(client, user, db_session):
     assert saved_post is None
 
 
-def test_chatroom_post_submission(client, user, db_session):
+def test_chatroom_post_submission(client, user):
     login_user_via_client(client, user.email, "password")
 
     response = client.post(
